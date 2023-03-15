@@ -64,22 +64,7 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
         
 
 
-    //   const response = await axios.post(
-    //     apiEditURL,
-    //     {
-    //       // model: "text-davinci-edit-001",
-    //       input: text,
-    //       instruction: `Make is sound more ${word}`,
-    //       max_tokens: 1024,
-    //       temperature: 0.5,
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         'Authorization' : `Bearer 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`,
-    //       },
-    //     }
-    //   );
+  
      const newSentence = response.data.choices[0].text;
 console.log("NEw Sentence: ", newSentence)
       setNewText(newSentence);

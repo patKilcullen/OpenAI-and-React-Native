@@ -35,7 +35,7 @@ const Home = () => {
   const [word, setWord] = useState("");
   const [newText, setNewText] = useState("");
 
-  console.log("HIIII: ", process.env.OPENAI_API_KEY);
+  console.log("HIIII: ", );
 
   const handleChangeText = async () => {
     setWord("");
@@ -52,7 +52,7 @@ const Home = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            'Authorization' : `Bearer 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`,
+            'Authorization' : `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         }
       );
@@ -80,7 +80,7 @@ const Home = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            'Authorization' : `Bearer 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`,
+            'Authorization' : `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         }
       );
