@@ -16,6 +16,7 @@ import {
   ScrollView,
   useWindowDimensions,
   TextInput,
+  Header,
 } from "react-native";
 
 import {
@@ -47,10 +48,9 @@ const Home = () => {
   const [newText, setNewText] = useState("");
 
 //   const openAIKey = Constants.expoConfig.extra.openAIKey
-console.log("BONGGOOO")
+
 console.log("APIrrr: ", process.env.OPENAI_API_KEY ) 
- console.log("faddddrt: ", process.env.FART ) 
-// console.log("KEY: ", openAIKey)
+
   const handleEditText = async () => {
     setWord("");
     setText("");
@@ -59,26 +59,40 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
             model: "text-davinci-edit-001",
             input: text,
             instruction: `Edit to sound more ${word}. `,
-            temperature: .1
+            temperature: .5
           });
-        
-
-
-  
      const newSentence = response.data.choices[0].text;
-console.log("NEw Sentence: ", newSentence)
       setNewText(newSentence);
-
-    //   console.log("NEW Sente: ", newSentence);
     } catch (error) {
-      // Consider implementing your own error handling logic here
       console.error("ERRORRRRR", error);
       alert(error.message);
     }
   };
 
+
+  const handleCompletionText = async () => {
+    setWord("");
+    setText("");
+    try {
+        const response = await openai.createEdit({
+            model: "text-davinci-edit-001",
+           prompt: `Make the following sound more ${word}: ${text}`,
+            temperature: .5
+          });
+     const newSentence = response.data.choices[0].text;
+      setNewText(newSentence);
+    } catch (error) {
+      console.error("ERRORRRRR", error);
+      alert(error.message);
+    }
+  };
+
+
   return (
     <ScrollView style={styles.container}>
+        <View style={styles.mainContent} >
+
+
       <Text style={styles.text}>Add the text you want to alter here: </Text>
       <TextInput
         style={styles.input}
@@ -96,10 +110,15 @@ console.log("NEw Sentence: ", newSentence)
         multiline={true}
         onChangeText={(word) => setWord(word)}
       />
-     
-      <Button title="edits " onPress={handleEditText} />
+     <View style={styles.buttons}>
+      {/* <Button title="       edit          " onPress={handleEditText} style={styles.button}/>
+      <Button title="completion" onPress={handleCompletionText} style={styles.button}/> */}
+      <Pressable title="       edit          " onPress={handleEditText} style={styles.pressable}><Text style={styles.pressableText}>Edit</Text></Pressable>
+      <Pressable title="completion" onPress={handleCompletionText} style={styles.pressable}><Text style={styles.pressableText}>Completion</Text></Pressable>
+      </View>
       {newText ? <Text style={styles.text}>Updated Text: </Text> : null}
       {newText ? <Text style={styles.newText}>{newText} </Text> : null}
+      </View>
     </ScrollView>
   );
 };
@@ -107,9 +126,22 @@ console.log("NEw Sentence: ", newSentence)
 const styles = StyleSheet.create({
   container: {
     height: 1000,
+    display: "flex",
+    alignContent: "center",
+  
+
+  },
+  mainContent: {
+    marginTop: 100,
+    display: "flex",
+    justifyContent: "center",
+    alignSelf: "center",
+
+ 
   },
   text: {
     color: "black",
+    alignSelf: "center"
   },
   input: {
     backgroundColor: "white",
@@ -121,8 +153,27 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   newText: {
-    backgroundColor: "aqua",
+    backgroundColor: "white",
   },
+  pressable: {
+    width: 100,
+    height: 30,
+    backgroundColor: "dodgerblue",
+    color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center"
+  },
+  pressableText: {
+    color: "white",
+    alignSelf: "center"
+  },
+  buttons: {
+    gap: 2,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  }
 });
 
 export default Home;

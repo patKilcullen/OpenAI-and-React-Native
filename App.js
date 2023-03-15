@@ -5,7 +5,7 @@ import Home2 from './components/index';
 import Sentence from './components/sentenceForm';
 import Package from './components/package'
 import {useDimensions} from '@react-native-community/hooks'
-
+import Header from './components/header'
 import "react-native-url-polyfill/auto"
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
  
-      
+      <Header />
       {/* <Home/> */}
          {/* <Home2/> */}
       {/* <Button title="OOOOO" > </Button> */}
@@ -26,9 +26,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
     backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
