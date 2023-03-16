@@ -5,7 +5,7 @@ const header = () => {
   return (
     <View style={styles.header}>
 
-        <Text>OpenIA Experiments</Text>
+        <Text style={styles.text}>OpenIA Experiments</Text>
     </View>
   )
 }
@@ -14,7 +14,14 @@ const styles = StyleSheet.create({
 header: {
     height: 80,
     paddingTop: 40,
-    backgroundColor: 'coral'
+    backgroundColor: 'aqua',
+    display: "flex",
+    alignItems: "center",
+    alignContent: "center"
+},
+text: {
+    alignSelf: "center",
+    fontSize: 30,
 }
 })
 

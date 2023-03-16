@@ -16,7 +16,8 @@ import {
   ScrollView,
   useWindowDimensions,
   TextInput,
-  Header,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import {
@@ -74,12 +75,14 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
     setWord("");
     setText("");
     try {
-        const response = await openai.createEdit({
-            model: "text-davinci-edit-001",
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
            prompt: `Make the following sound more ${word}: ${text}`,
             temperature: .5
           });
      const newSentence = response.data.choices[0].text;
+     const data = response.data;
+     console.log("NEW SENTENCE: ", data)
       setNewText(newSentence);
     } catch (error) {
       console.error("ERRORRRRR", error);
@@ -89,10 +92,13 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
 
 
   return (
-    <ScrollView style={styles.container}>
-        <View style={styles.mainContent} >
 
-
+    <KeyboardAvoidingView
+    style={styles.container}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+  >
+    <ScrollView style={styles.mainContent}>
+    
       <Text style={styles.text}>Add the text you want to alter here: </Text>
       <TextInput
         style={styles.input}
@@ -103,6 +109,8 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
       />
 
       <Text style={styles.text}>Make you text sound more: </Text>
+      <ScrollView>
+  
       <TextInput
         style={styles.smallInput}
         placeholder="enter text"
@@ -110,35 +118,39 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
         multiline={true}
         onChangeText={(word) => setWord(word)}
       />
+      </ScrollView>
      <View style={styles.buttons}>
-      {/* <Button title="       edit          " onPress={handleEditText} style={styles.button}/>
-      <Button title="completion" onPress={handleCompletionText} style={styles.button}/> */}
-      <Pressable title="       edit          " onPress={handleEditText} style={styles.pressable}><Text style={styles.pressableText}>Edit</Text></Pressable>
+      <Pressable title="edit" onPress={handleEditText} style={styles.pressable}><Text style={styles.pressableText}>Edit</Text></Pressable>
       <Pressable title="completion" onPress={handleCompletionText} style={styles.pressable}><Text style={styles.pressableText}>Completion</Text></Pressable>
       </View>
       {newText ? <Text style={styles.text}>Updated Text: </Text> : null}
       {newText ? <Text style={styles.newText}>{newText} </Text> : null}
-      </View>
-    </ScrollView>
+      </ScrollView>
+  </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+
   container: {
-    height: 1000,
+    height: "100%",
     display: "flex",
     alignContent: "center",
-  
+    alignItems: "center",
+
+    borderColor: "black",
+    borderWidth: 2,
 
   },
-  mainContent: {
-    marginTop: 100,
-    display: "flex",
-    justifyContent: "center",
-    alignSelf: "center",
+//   mainContent: {
+//     marginTop: 100,
+//     display: "flex",
+//    borderColor: "black",
+//    borderWidth: 2,
+//     alignSelf: "center",
 
  
-  },
+//   },
   text: {
     color: "black",
     alignSelf: "center"

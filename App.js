@@ -6,6 +6,7 @@ import Sentence from './components/sentenceForm';
 import Package from './components/package'
 import {useDimensions} from '@react-native-community/hooks'
 import Header from './components/header'
+import Keyboard from './components/keyboard'
 import "react-native-url-polyfill/auto"
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       {/* <Button title="OOOOO" > </Button> */}
       <Package/>
       {/* <Sentence /> */}
+      {/* <Keyboard/> */}
       <StatusBar style="auto" />
      </SafeAreaView>
   );
