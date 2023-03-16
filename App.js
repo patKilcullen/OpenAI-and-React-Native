@@ -7,6 +7,7 @@ import Package from './components/package'
 import {useDimensions} from '@react-native-community/hooks'
 import Header from './components/header'
 import Keyboard from './components/keyboard'
+import ChatGPT from './components/chatGPT'
 import "react-native-url-polyfill/auto"
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
          {/* <Home2/> */}
       {/* <Button title="OOOOO" > </Button> */}
       <Package/>
+      {/* <ChatGPT/> */}
       {/* <Sentence /> */}
       {/* <Keyboard/> */}
       <StatusBar style="auto" />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 
 const header = () => {
   return (
@@ -22,6 +22,9 @@ header: {
 text: {
     alignSelf: "center",
     fontSize: 30,
+    fontFamily: Platform.OS === 'ios' ? 'Optima-Bold' : 'monospace',
+    fontWeight: "bold",
+    color: "red"
 }
 })
 

@@ -25,6 +25,7 @@ import {
   useDeviceOrientation,
 } from "@react-native-community/hooks";
 import axios from "axios";
+// const { ChatGPTAPI }  = require("chatgpt")
 
 // import {FART} from '@env'
 // import Constants from 'expo-constants';
@@ -38,6 +39,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
+
+// const api = new ChatGPTAPI({
+//     apiKey: process.env.OPENAI_API_KEY
+//   })
 
 const Home = () => {
   const apiCompletionURL =
@@ -95,15 +100,16 @@ console.log("APIrrr: ", process.env.OPENAI_API_KEY )
 
   const handleEditBio = async () => {
     
+
+
+
+
+    
     try {
-        const response = await openai.createCompletion({
-            model: "gpt-3.5-turbo",
-           prompt: `Make the following sound more ${bioWord}: ${info}`,
-            temperature: .5
-          });
-     const newSentence = response.data.choices[0].text;
-console.log("New Senteneeeeeee", response.data.choices)
-      setInfo(newSentence);
+
+//         const res = await api.sendMessage('what is a good name for a dog!')
+//   console.log(res.text)
+
     } catch (error) {
       console.error("ERRORRRRR", error);
       alert(error.message);
@@ -121,7 +127,7 @@ console.log("New Senteneeeeeee", response.data.choices)
     <Text>This tool allows you to enter a piece of writing, followed by a word, typically an adjective,, and rewrite the text based on on the word. For example, you could add any piece of text in the larger box,and in the smaller box below  </Text>
     <ScrollView style={styles.mainContent}>
     
-      <Text style={styles.instructions}>Add the text you want to alter here: </Text>
+      {/* <Text style={styles.instructions}>Add the text you want to alter here: </Text>
       <TextInput
         style={styles.input}
         placeholder={text}
@@ -146,9 +152,9 @@ console.log("New Senteneeeeeee", response.data.choices)
       <Pressable title="completion" onPress={handleCompletionText} style={styles.pressable}><Text style={styles.pressableText}>Completion</Text></Pressable>
       </View>
       {newText ? <Text style={styles.text}>Updated Text: </Text> : null}
-      {newText ? <Text style={styles.newText}>{newText} </Text> : null}
+      {newText ? <Text style={styles.newText}>{newText} </Text> : null} */}
 
-      {/* <Text>{info}</Text>
+      <Text>{info}</Text>
       <TextInput
         style={styles.smallInput}
         placeholder="change how???"
@@ -156,7 +162,7 @@ console.log("New Senteneeeeeee", response.data.choices)
         multiline={true}
         onChangeText={(word) => setBioWord(word)}
       />
-      <Pressable title="completion" onPress={handleEditBio} style={styles.pressable}><Text style={styles.pressableText}>Change Bio</Text></Pressable> */}
+      <Pressable title="completion" onPress={handleEditBio} style={styles.pressable}><Text style={styles.pressableText}>Change Bio</Text></Pressable>
       </ScrollView>
   </KeyboardAvoidingView>
   );
